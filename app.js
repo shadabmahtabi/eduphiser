@@ -22,7 +22,6 @@ app.use(express.json());
 
 // Importing routes from other files
 const indexRoutes = require('./routes/indexRouter');
-const ErrorHandler = require('./utils/ErrorHandler');
 // const userRoutes = require('./routes/user-router');
 
 
@@ -30,9 +29,11 @@ const ErrorHandler = require('./utils/ErrorHandler');
 app.use('/', indexRoutes)
 
 // Error Handling
+const ErrorHandler = require('./utils/ErrorHandler');
+const { generatedErrors } = require('./middlewares/error');
 /*
-    404 - Page not found error
-    The server could not find the requested resource. 
+404 - Page not found error
+The server could not find the requested resource. 
 */
 app.all( '*', (req, res, next) => {
     next(new ErrorHandler("Requested Url Not Found", 404))
@@ -43,17 +44,12 @@ app.all( '*', (req, res, next) => {
 });
   
 // Adding middleware to handle any errors that occur in our application
-app.use((err, req, res, next)=> {
-    /*
-        Any unhandled errors will be caught here and the following data will be sent:
-            .message: A short description of the error.
-            .status: The HTTP status code to send with the response.
-    */
-    res.status(err.status || 500).send({
-      message: err.message,
-      error: err.name
-    });
-})
+/*
+    Any unhandled errors will be caught here and the following data will be sent:
+        .message: A short description of the error.
+        .status: The HTTP status code to send with the response.
+*/
+app.use(generatedErrors);
 
 
 // Setting up server port and listening on
