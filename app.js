@@ -4,6 +4,9 @@ const app = express();
 // For initializing environment variables i.e., PORT, etc.
 require('dotenv').config();
 
+// db connection
+require('./models/database').connectDatabase();
+
 // For showing logs
 /*
     It shows which route is being used and when it's called.
