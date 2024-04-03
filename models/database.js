@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { catchAsynchErrors } = require("../middlewares/catchAsynchErrors");
 
 exports.connectDatabase = async (req, res, next) => {
   try {

@@ -14,7 +14,7 @@ require('./models/database').connectDatabase();
 const logger = require('morgan');
 app.use(logger('dev'));
 
-// Parsing the request body
+// BodyParser - Parsing the request body
 /*
     This middleware is responsible for parsing incoming requests 
     and populating req.body with any data sent in a JSON payload.  
@@ -22,6 +22,7 @@ app.use(logger('dev'));
     then the middleware will parse the content of this request to make it available as params on the req.body object.
 */
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Importing routes from other files
 const indexRoutes = require('./routes/indexRouter');
