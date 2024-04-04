@@ -24,6 +24,16 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// session and cookie
+const expressSession = require('express-session');
+var cookieparser = require('cookie-parser')
+app.use(expressSession({
+    resave: true,
+    saveUninitialized: true,
+    secret: process.env.EXPRESS_SESSION_SECRET
+}))
+app.use(cookieparser())
+
 // Importing routes from other files
 const indexRoutes = require('./routes/indexRouter');
 // const userRoutes = require('./routes/user-router');

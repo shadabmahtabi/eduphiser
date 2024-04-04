@@ -1,6 +1,7 @@
 const { catchAsynchErrors } = require("../middlewares/catchAsynchErrors");
 const userModel = require("../models/userModel");
 const ErrorHandler = require("../utils/ErrorHandler");
+const { sendToken } = require("../utils/sendToken");
 
 /*
   Controller function for showing homepage.
@@ -20,13 +21,8 @@ exports.userSignUp = catchAsynchErrors(async (req, res, next) => {
   let user = await new userModel(req.body).save();
 
   // Sending back the created user with a response code of 201 which means 'Created'
-  res.status(201).json({
-    status: true,
-    data: {
-      user: user,
-    },
-    message: "User has been successfully signed up!",
-  });
+
+  sendToken(user, 201, res, next);
 });
 
 /*
@@ -45,11 +41,5 @@ exports.userSignIn = catchAsynchErrors(async (req, res, next) => {
 
   if (!isMatch) return next(new ErrorHandler("Wrong Credentials", 400));
 
-  res.status(200).json({
-    status: true,
-    data: {
-      user: user,
-    },
-    message: "User has been successfully signed in!",
-  });
+  sendToken(user, 200, res, next);
 });
