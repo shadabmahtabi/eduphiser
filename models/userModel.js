@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bycrpt = require('bcryptjs')
 
 const userSchema = new mongoose.Schema(
   {
@@ -15,6 +16,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      select: false,
     //   validate: {
     //     validator: function (v) {
     //       // Password validation regex: at least 8 characters, at least one uppercase letter, one lowercase letter, one number, and one special character
@@ -47,5 +49,14 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+userSchema.pre("save", function (){
+    let salt = bycrpt.genSaltSync(10);
+    this.password = bycrpt.hashSync(this.password, salt);
+})
+
+userSchema.methods.comparePassword = function (password) {
+    return bycrpt.compareSync(password, this.password);
+}
 
 module.exports = mongoose.model("User", userSchema);
