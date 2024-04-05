@@ -3,7 +3,7 @@
 For using this repository, you need to perform steps given below:
 
 1. Open terminal and type command as
-    - git clone https://github.com/shadabmahtabi/Dhaaga.git
+    - git clone https://github.com/shadabmahtabi/eduphiser.git
 
 2. After this, Install all dependencies by using command as
     - npm install
