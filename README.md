@@ -11,4 +11,4 @@ For using this repository, you need to perform steps given below:
 3. Now you can run the  project in development mode with following commands :
     - npm run dev
 
-Author: Shadab Mahtabi
+# Author: Shadab Mahtabi
