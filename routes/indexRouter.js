@@ -1,5 +1,11 @@
 const express = require("express");
-const { homepage, userSignUp, userSignIn } = require("../controllers/indexController");
+const {
+  homepage,
+  userSignUp,
+  userSignIn,
+  userSignOut,
+} = require("../controllers/indexController");
+const { isAuthenticated } = require("../middlewares/auth");
 const router = express.Router();
 
 /**
@@ -8,7 +14,7 @@ const router = express.Router();
  *  @access Public
  *  @desc   For showing Home Page
  */
-router.get("/", homepage);
+router.get("/", isAuthenticated, homepage);
 
 /**
  *  @method POST
@@ -25,6 +31,14 @@ router.post("/signup", userSignUp);
  * @desc    For handling User Sign In Requests From The Front End.
  */
 router.post("/signin", userSignIn);
+
+/**
+ * @method  GET
+ * @route   /signout
+ * @access  Private
+ * @desc    For handling User Log Out Requests From The Front End.
+ */
+router.get("/signout", isAuthenticated, userSignOut);
 
 /**
  * @method

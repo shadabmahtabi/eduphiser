@@ -8,9 +8,8 @@ const { sendToken } = require("../utils/sendToken");
 */
 exports.homepage = catchAsynchErrors(async (req, res, next) => {
   res.json({
-    name: "Shadab",
-    age: 20,
-    branch: "CSE",
+    message: "Secure homepage",
+    // user: req.user
   });
 });
 
@@ -42,4 +41,12 @@ exports.userSignIn = catchAsynchErrors(async (req, res, next) => {
   if (!isMatch) return next(new ErrorHandler("Wrong Credentials", 400));
 
   sendToken(user, 200, res, next);
+});
+
+/*
+  Controller function to handle login of a user.
+*/
+exports.userSignOut = catchAsynchErrors(async (req, res, next) => {
+  res.clearCookie("token");
+  res.status(200).json({ message: "Successfully Signed Out!" });
 });

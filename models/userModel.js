@@ -73,7 +73,7 @@ userSchema.methods.comparePassword = function (password) {
 /*
     This method is used to create jwt token.
 */
-userSchema.methods.getjwttoken = () => {
+userSchema.methods.getjwttoken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
