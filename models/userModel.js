@@ -4,8 +4,10 @@ const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema(
   {
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
+    username: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -29,13 +31,6 @@ const userSchema = new mongoose.Schema(
       //       `Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character!`,
       //   },
     },
-    address: {
-      street: { type: String },
-      city: { type: String },
-      state: { type: String },
-      country: { type: String },
-      postalCode: { type: String },
-    },
     phoneNumber: {
       type: String,
       require: true,
@@ -44,9 +39,6 @@ const userSchema = new mongoose.Schema(
       maxLength: ["10", "Phone number must not exceeds 10 digits."],
       //   match: [/^\+91\s\d{10}$/, "Please fill a valid mobile number."]
     },
-    dateOfBirth: { type: Date },
-    gender: { type: String, enum: ["Male", "Female", "Other"] },
-    profilePicture: { type: String }, // URL to the profile picture
   },
   { timestamps: true }
 );
