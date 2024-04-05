@@ -1,4 +1,4 @@
-# Dhaaga
+# Eduphyiser
 
 For using this repository, you need to perform steps given below:
 
@@ -8,7 +8,9 @@ For using this repository, you need to perform steps given below:
 2. After this, Install all dependencies by using command as
     - npm install
 
-3. Now you can run the  project in development mode with following commands :
+3. Create .env file and add PORT, MONGODB_URL, EXPRESS_SESSION_SECRET, JWT_SECRET,  JWT_EXPIRE and COOKIE_EXPIRE
+
+4. Now you can run the  project in development mode with following commands :
     - npm run dev
 
 # Author: Shadab Mahtabi
